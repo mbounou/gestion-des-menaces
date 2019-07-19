@@ -55,7 +55,7 @@
       </li>
        <!-- Nav Item - Dashboard -->
        <li class="nav-item active">
-       <a class="nav-link" href="{{ route('upload') }}">
+       <a class="nav-link" href="{{ route('upload.index') }}">
           <i class="fas fa-fw fa-upload"></i>
           <span>Charger le fichier log</span></a>
       </li>

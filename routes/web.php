@@ -17,12 +17,17 @@ Route::get('/', function () {
 });
 
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/upload','UploadFileController@index')->name('upload');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/upload','UploadFileController@index')->name('upload.index');
+
+Route::post('/upload','UploadFileController@store')->name('upload.store');
+
+

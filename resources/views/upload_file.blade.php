@@ -21,12 +21,13 @@
           </div>
           <!-- Card Body -->
           <div class="card-body">
-            <form class="user">
+          <form class="user" method="POST" action="{{ route('upload.store') }}" enctype="multipart/form-data" >
+              @csrf
               <div class="form-group row">
-                  <input type="file"  id="exampleFirstName" placeholder="Fichier log" required>
+                  <input type="file"  name="file_name" placeholder="Fichier log" required>
               </div>
               <div class="form-group row">
-                  <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-refresh fa-sm text-white-50"></i> Catégoriser la menace</a>
+                 <button type="submit" class="btn btn-primary">Enregistrer</button>
               </div>
                
               </form>

@@ -14,14 +14,14 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Malware classifier - Dashboard</title>
+  <title>Page d'accueil de gestion</title>
 
   <!-- Custom fonts for this template-->
   <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
@@ -36,7 +36,7 @@
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
         <div class="sidebar-brand-icon rotate-n-15">
-            <img src="icone.ico" alt=" " class="img-circle" width="45" height="45"/>
+            <img src="/icone.ico" alt=" " class="img-circle" width="45" height="45"/>
            <!--<i class="fas icone.ico"></i> 
             fa-laugh-wink-->
  
@@ -61,7 +61,7 @@
       </li>
        <!-- Nav Item - Dashboard -->
        <li class="nav-item active">
-        <a class="nav-link" href="categorie_menaces.html">
+       <a class="nav-link" href="{{ route('categories.index') }}">
           <i class="fas fa-fw fa-file-alt"></i>
           <span>Categories de menaces</span></a>
       </li>
@@ -217,7 +217,7 @@
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Administrateur</span>
                 <!--https://www.google.com/search?q=user&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjfoO_w94HjAhUSEBQKHeOZBs8Q_AUIECgB&biw=1366&bih=608#imgrc=vC9_77QZIvBUKM:-->
-                <img class="img-profile rounded-circle" src="cedric.ico">
+                <img class="img-profile rounded-circle" src="/cedric.ico">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -250,7 +250,7 @@
           -->
 
           <div class="row">
-                @yield('content')
+              @yield('content')
           </div>
 
         </div>

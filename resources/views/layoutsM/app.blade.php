@@ -67,6 +67,12 @@
       </li>
        <!-- Nav Item - Dashboard -->
        <li class="nav-item active">
+          <a class="nav-link" href="{{ route('menaces.index') }}">
+            <i class="fas fa-fw fa-user-alt"></i>
+            <span>Menaces</span></a>
+        </li>
+
+       <li class="nav-item active">
         <a class="nav-link" href="users.html">
           <i class="fas fa-fw fa-user-alt"></i>
           <span>Comptes utilisateurs</span></a>

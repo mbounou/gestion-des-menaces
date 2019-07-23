@@ -45,6 +45,7 @@ class UploadFileController extends Controller
      */
     public function store(FileRequest $request)
     {
+        dd(asset('storage/1563555697fichierLog.log'));
         $data = $request->all();
         $uploadedFile = $request->file('file_name');
         $filename = time().$uploadedFile->getClientOriginalName();
@@ -57,11 +58,11 @@ class UploadFileController extends Controller
         );
 
         $upload = new File();
-        $upload->file_name = $path."/".$filename;
+        $upload->file_name = $path."".$filename;
         $upload->user_id = Auth::user()->id;
         $upload->save();
 
-        return view('upload_file');
+        return view('menaces.index');
     }
 
     /**

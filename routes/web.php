@@ -32,4 +32,6 @@ Route::post('/upload','UploadFileController@store')->name('upload.store');
 
 Route::resource('/categories', 'CategorieController');
 
+Route::resource('/menaces', 'MenacesController');
+
 

@@ -8,6 +8,8 @@ use App\File;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use Illuminate\Support\Facades\Storage;
+use App\Models\CategorieM;
+use App\Models\Menace;
 
 class UploadFileController extends Controller
 {
@@ -45,12 +47,13 @@ class UploadFileController extends Controller
      */
     public function store(FileRequest $request)
     {
-        dd(asset('storage/1563555697fichierLog.log'));
+        // $this->validate($request,[
+        //     'file_name' => 'required|mimes:text/log'
+        // ]);
         $data = $request->all();
         $uploadedFile = $request->file('file_name');
         $filename = time().$uploadedFile->getClientOriginalName();
         $path = Storage::disk('files')->getAdapter()->getPathPrefix();
-        
         Storage::disk('files')->putFileAs(
             null,
             $uploadedFile,
@@ -62,7 +65,68 @@ class UploadFileController extends Controller
         $upload->user_id = Auth::user()->id;
         $upload->save();
 
-        return view('menaces.index');
+        $file = Storage::disk('files')->get($filename);
+        $tableLogs = array();
+
+        $fileligne = explode("\n",$file);
+        foreach ($fileligne as $elt) {
+            $entries = explode(" ", $elt);
+            $lineLog = array();
+            // dd($entries);
+            foreach($entries as $entry) {
+                $data = array_pad(explode("=", $entry),2,null);
+                $key = $data[0];
+                $value = $data[1];
+                $lineLog[$key] = $value;
+            }
+            
+            if (isset($lineLog['logid'])) {
+        
+                array_push($tableLogs, $lineLog); // This line should be removed in a normal application
+            }
+            
+        }
+        $inject = CategorieM::find(6);
+        $dos = CategorieM::find(7);
+        $menaces = Menace::all();
+        if(empty($menaces)){
+            foreach ($tableLogs as $ligne) {
+                if(strpos($ligne['attack'],"DoS")){
+                    Menace::create([
+                        'categorie_id' => $dos->id,
+                        'signature' => $ligne['attack'],
+                        'nom_menace' => "DoS"
+                    ]);
+                }else if(strpos($ligne['attack'],"Injection")){
+                    Menace::create([
+                        'categorie_id' => $inject->id,
+                        'signature' => $ligne['attack'],
+                        'nom_menace' => "Injection"
+                    ]);
+                }
+            }
+        }else{
+            foreach ($menaces as $menace) {
+                Menace::destroy($menace->id);
+            }
+            foreach ($tableLogs as $ligne) {
+                if(strpos($ligne['attack'],"DoS")){
+                    Menace::create([
+                        'categorie_id' => $dos->id,
+                        'signature' => $ligne['attack'],
+                        'nom_menace' => "DoS"
+                    ]);
+                }else if(strpos($ligne['attack'],"Injection")){
+                    Menace::create([
+                        'categorie_id' => $inject->id,
+                        'signature' => $ligne['attack'],
+                        'nom_menace' => "Injection"
+                    ]);
+                }
+            }
+        }
+        
+        return redirect()->route('menaces.index');
     }
 
     /**

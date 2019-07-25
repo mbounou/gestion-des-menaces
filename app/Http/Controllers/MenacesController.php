@@ -72,12 +72,14 @@ class MenacesController extends Controller
      */
     public function edit(int $menace)
     {
-        $menace = Menace::find($id);
+        $menace = Menace::find($menace);
         if (empty($menace)) {
             return redirect()->back();
         }
+        $categorie = CategorieM::find($menace->categorie_id);
+        $categories = CategorieM::where('id','!=',$menace->categorie_id)->get();
 
-        return view('menaces.edit', compact('menace'));
+        return view('menaces.edit', compact('menace','categorie','categories'));
     }
 
     /**
@@ -89,7 +91,7 @@ class MenacesController extends Controller
      */
     public function update(Request $request, int $menace)
     {
-        $menace = Menace::find($id);
+        $menace = Menace::find($menace);
         if (empty($menace)) {
             return redirect()->back();
         } 
@@ -110,7 +112,7 @@ class MenacesController extends Controller
      */
     public function destroy(int $menace)
     {
-        $menace = Menace::find($id);
+        $menace = Menace::find($menace);
         if (empty($menace)) {
             return redirect()->back();
         }
